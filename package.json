@@ -1,0 +1,17 @@
+{
+  "name": "01-api-restful",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:LucianBinner/study-c-079-01-api-restful.git",
+  "author": "Lucian Binner <lucian.binner@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.5",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.4"
+  }
+}
