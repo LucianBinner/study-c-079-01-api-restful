@@ -133,7 +133,7 @@ dist
 
 # Others
 .idea/
-ormconfig.json
 
 uploads/*
 !uploads/.gitkeep
+anotation.txt

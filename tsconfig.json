@@ -12,11 +12,9 @@
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@config/*": ["src/config/*"],
-      "@modules/*": ["src/modules/*"],
-      "@shared/*": ["src/shared/*"]
+      "@/*": ["./src/*"]
     }
   }
 }
