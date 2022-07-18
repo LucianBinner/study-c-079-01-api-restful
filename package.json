@@ -9,7 +9,8 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/shared/http/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
