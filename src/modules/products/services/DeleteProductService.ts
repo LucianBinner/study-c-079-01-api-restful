@@ -1,6 +1,5 @@
 import AppError from '@/shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import { ProductRepository } from '../typeorm/repositories/ProductsRepository';
+import ProductModel from '../mongoose/model/Product.model';
 
 interface IRequest {
   id: string;
@@ -8,11 +7,10 @@ interface IRequest {
 
 export default class DeleteProductService {
   public async execute({ id }: IRequest): Promise<void> {
-    const productsRepository = getCustomRepository(ProductRepository);
-    const product = await productsRepository.findOne(id);
+    const product = await ProductModel.findOne({ _id: id });
     if (!product) {
       throw new AppError('Product not found.');
     }
-    await productsRepository.remove(product);
+    await product.deleteOne({ _id: id });
   }
 }

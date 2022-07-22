@@ -1,7 +1,5 @@
 import AppError from '@/shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import Product from '../typeorm/entities/Product';
-import { ProductRepository } from '../typeorm/repositories/ProductsRepository';
+import ProductModel from '../mongoose/model/Product.model';
 
 interface IRequest {
   id: string;
@@ -11,25 +9,26 @@ interface IRequest {
 }
 
 export default class UpdateProductService {
-  public async execute({
-    id,
-    name,
-    price,
-    quantity,
-  }: IRequest): Promise<Product> {
-    const productsRepository = getCustomRepository(ProductRepository);
-    const product = await productsRepository.findOne(id);
+  public async execute({ id, name, price, quantity }: IRequest): Promise<void> {
+    const product = await ProductModel.findById(id);
     if (!product) {
       throw new AppError('Product not found.');
     }
-    const productExists = await productsRepository.findByName(name);
+    const productExists = await ProductModel.findOne({ name });
     if (productExists && name !== product.name) {
       throw new AppError('There is already one product with this name!');
     }
-    product.name = name;
-    product.price = price;
-    product.quantity = quantity;
-    await productsRepository.save(product);
-    return product;
+    await ProductModel.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          name,
+          price,
+          quantity,
+        },
+      },
+    );
   }
 }
